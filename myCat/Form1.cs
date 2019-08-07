@@ -23,12 +23,22 @@ namespace myCat
         private void Form1_Load(object sender, EventArgs e)
         {
             gfx = CreateGraphics();
+
+            this.Text = "Cat Drawing";
+
+            //makes form not resizeable.
+            this.FormBorderStyle = FormBorderStyle.FixedSingle; 
+            this.MinimizeBox = false;
+
+         
+           
         }
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
 
-            Point pos = this.PointToClient(Cursor.Position);
-            this.Text = $"X: {pos.X} Y: {pos.Y}";
+           //for debuging
+           // Point pos = this.PointToClient(Cursor.Position);
+           // this.Text = $"X: {pos.X} Y: {pos.Y}";
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
@@ -199,6 +209,7 @@ namespace myCat
             };
 
             gfx.DrawCurve(Pens.Black, rightpaw, 0.6f);
+
             //yarn
             gfx.FillEllipse(Brushes.Red, 225, 243, 40, 40);
             Point[] yarnTrail =
