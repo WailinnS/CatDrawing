@@ -28,11 +28,12 @@ namespace myCat
         {
 
             Point pos = this.PointToClient(Cursor.Position);
-            this.Text = $"X: {pos.X} Y: {pos.Y}"; 
+            this.Text = $"X: {pos.X} Y: {pos.Y}";
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
+
             //head & face
             gfx.FillEllipse(Brushes.SteelBlue, 175, 75, 100, 100);
             gfx.DrawArc(Pens.Black, 195, 111, 25, 25, 220, 100);
@@ -48,14 +49,14 @@ namespace myCat
             //right ear
             GraphicsPath outsideRight = new GraphicsPath();
             GraphicsPath insideRight = new GraphicsPath();
-            Point[] rightFur = 
+            Point[] rightFur =
             {
                 new Point(246,80),
                 new Point(265,50),
                 new Point(281,31),
                 new Point(261,90)
             };
-            Point[] rightNoFur = 
+            Point[] rightNoFur =
             {
                 new Point(261,90),
                 new Point(281,31),
@@ -63,7 +64,7 @@ namespace myCat
             };
             outsideRight.AddPolygon(rightFur);
             insideRight.AddPolygon(rightNoFur);
-            gfx.FillPath(Brushes.SteelBlue,outsideRight);
+            gfx.FillPath(Brushes.SteelBlue, outsideRight);
             gfx.FillPath(Brushes.Pink, insideRight);
 
             //Left ear
@@ -76,7 +77,7 @@ namespace myCat
                 new Point(120,83),
                 new Point(179,110)
             };
-            Point[] leftNoFur = 
+            Point[] leftNoFur =
             {
                 new Point(120,83),
                 new Point(178,110),
@@ -88,19 +89,55 @@ namespace myCat
             insideLeft.AddPolygon(leftNoFur);
             gfx.FillPath(Brushes.SteelBlue, outsideLeft);
             gfx.FillPath(Brushes.Pink, insideLeft);
+            GraphicsPath body = new GraphicsPath();
 
             //body outline
-            Point[] rightSide =
+            Point[] mainBody =
             {
                 new Point(255,166),
                 new Point(260,175),
                 new Point(280,190),
-                new Point(300,200),
-                new Point(311,200),
-                new Point(326,260),
-                new Point(315,277)
+                new Point(290,195),
+                new Point(311,210),
+                new Point(320,250),
+                new Point(310,273),
+                new Point(310,273),
+                new Point(270,273),
+                new Point(260,250),
+                new Point(230,240),
+                new Point(225,230),//start of left side
+                new Point(225,273),
+                new Point(225,273),
+                new Point(200,273),
+                new Point(185,270),
+                new Point(202,250),
+                new Point(202,168)
+           
             };
-            gfx.DrawCurve(Pens.Red, rightSide);
+
+
+
+
+            Point[] tail =
+            {
+                new Point(315,248),
+                new Point(340,240),
+                new Point(370,248),
+                new Point(390,240)
+            };
+
+            body.AddCurve(mainBody);
+   
+            gfx.FillPath(Brushes.SteelBlue, body);
+         
+            gfx.DrawCurve(new Pen(Color.SteelBlue,10.0f),tail);
+            gfx.DrawArc(new Pen(Color.SteelBlue, 10.0f), 385, 235,5, 5, 0 , 90);
+
+            //leg outline
+            //gfx.DrawEllipse(Pens.RoyalBlue, 280, 230, 40, 40);
+            gfx.DrawArc(Pens.Black, 280, 230, 40, 40, 200, 120);
+            gfx.FillEllipse(Brushes.Red, 225, 241, 40, 40); //ball
+
         }
     }
 }
